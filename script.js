@@ -1,3 +1,17 @@
+const body = document.querySelector('body');
+const startButton = document.createElement('button')
+startButton.innerText = 'Start Game';
+startButton.style.backgroundColor = 'red';
+
+startButton.addEventListener('click', () => {
+    startGame()
+})
+
+body.appendChild(startButton);
+
+
+
+
 const game = () => {
 
   const gameBoard = 
@@ -47,15 +61,14 @@ function resetGame() {
     currentPlayer = 0;
 }       
 
-    const CreatePlayer = function (name, marker){
-        this.name = name;
-        this.marker = marker;
-    }
+    function createPlayer(name, marker) {
+    return { name, marker };
+}
 
-    console.log(CreatePlayer);
+    console.log(createPlayer);
 
-    const player1 = new CreatePlayer("Player 1", "X");
-    const player2 = new CreatePlayer("Player 2", "O");
+    const player1 = createPlayer("Player 1", "X");
+    const player2 = createPlayer("Player 2", "O");
 
     console.log(player1);
     console.log(player2);
@@ -64,7 +77,6 @@ function resetGame() {
 
     const players = [player1, player2];
     console.log(players); 
-    const body = document.querySelector("body");
     const playersContainer = document.createElement('div');
     playersContainer.classList.add('playersContainer');
     body.appendChild(playersContainer)
@@ -165,7 +177,18 @@ function resetGame() {
         gameContainer.appendChild(cell);
 }
 
+const resetButton = document.createElement('button');
+resetButton.id = 'reset';
+resetButton.style.backgroundColor = 'lightgray';
+resetButton.innerText = 'Reset';
+
+resetButton.addEventListener("click", () => {resetGame()})
+
+body.appendChild(resetButton)
 }
 
 
-game();
+const startGame = () => {
+    startButton.remove()
+    game()
+}
