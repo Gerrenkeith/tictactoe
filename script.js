@@ -60,8 +60,65 @@ function resetGame() {
     console.log(player1);
     console.log(player2);
 
+
+
     const players = [player1, player2];
-    console.log(players);
+    console.log(players); 
+    const body = document.querySelector("body");
+    const playersContainer = document.createElement('div');
+    playersContainer.classList.add('playersContainer');
+    body.appendChild(playersContainer)
+    
+    for (let i = 0; i < players.length; i++){
+        const playerCard = document.createElement('div');
+        playerCard.classList.add('playerCard');   
+        playersContainer.appendChild(playerCard)
+
+        const name = document.createElement('h2');
+        name.id = i;
+        name.innerText = players[i].name
+        playerCard.appendChild(name)
+
+        const button = document.createElement('button')
+        button.style.backgroundColor = 'lightgray';
+        button.innerText = 'edit'
+
+
+        button.addEventListener("click", () => {
+                name.remove()
+                button.remove()
+
+                const nameInput = document.createElement('input')
+                nameInput.classList.add('nameInput')
+                const submitButton = document.createElement('button')
+                submitButton.classList.add('submitButton')
+                submitButton.style.background = 'lightgray';
+                submitButton.innerText = '✔️'
+
+                submitButton.addEventListener('click', () => {
+                    name.innerText = nameInput.value;
+                    players[i].name = nameInput.value;
+
+                    console.log(players)
+
+                  nameInput.remove()
+                  submitButton.remove();
+
+                    playerCard.appendChild(name)
+                    playerCard.appendChild(button)
+                })
+                
+                playerCard.appendChild(nameInput)
+                playerCard.appendChild(submitButton)
+
+        })
+
+        playerCard.appendChild(button)
+   
+        }
+    
+
+ 
 
     let currentPlayer = 0 ;
 
@@ -72,7 +129,7 @@ function resetGame() {
     }
 
 
-    const body = document.querySelector("body");
+   
     const gameContainer = document.createElement("div");
     gameContainer.classList.add("game-container");
     body.appendChild(gameContainer);
@@ -109,5 +166,6 @@ function resetGame() {
 }
 
 }
+
 
 game();
